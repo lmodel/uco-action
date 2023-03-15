@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://lmodel.github.io/uco-action/Action/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.2" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.3" name="generator"/>
 <title>Class: Action - uco-action</title>
-<link href="../assets/stylesheets/main.7bf56d0a.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.c4a75a56.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -208,103 +208,79 @@
     class Action
       UcoObject &lt;|-- Action
 
-      Action : actionCount
-        Action &lt;.. non negative integer type : actionCount
-      Action : actionStatus
-        Action &lt;.. ActionStatusTypeEnum : actionStatus
-      Action : createdBy
-        Action &lt;.. string : createdBy
-      Action : description
-        Action &lt;.. string : description
-      Action : endTime
-        Action &lt;.. datetime : endTime
-      Action : environment
-        Action &lt;.. UcoObject : environment
-      Action : error
-        Action &lt;.. UcoObject : error
-      Action : externalReference
-        Action &lt;.. string : externalReference
-      Action : hasFacet
-        Action &lt;.. string : hasFacet
-      Action : instrument
-        Action &lt;.. UcoObject : instrument
-      Action : location
-        Action &lt;.. Location : location
-      Action : modifiedTime
-        Action &lt;.. datetime : modifiedTime
-      Action : name
-        Action &lt;.. string : name
-      Action : object
-        Action &lt;.. UcoObject : object
-      Action : objectCreatedTime
-        Action &lt;.. datetime : objectCreatedTime
-      Action : objectMarking
-        Action &lt;.. MarkingDefinitionAbstraction : objectMarking
-      Action : participant
-        Action &lt;.. UcoObject : participant
-      Action : performer
-        Action &lt;.. UcoObject : performer
-      Action : result
-        Action &lt;.. UcoObject : result
-      Action : specVersion
-        Action &lt;.. string : specVersion
-      Action : startTime
-        Action &lt;.. datetime : startTime
-      Action : subaction
-        Action &lt;.. Action : subaction
-      Action : tag
-        Action &lt;.. string : tag
-
 
       Action &lt;|-- ActionLifecycle
       Action &lt;|-- ActionPattern
 
+
       Action : actionCount
-        Action &lt;.. non negative integer type : actionCount
+
       Action : actionStatus
-        Action &lt;.. ActionStatusTypeEnum : actionStatus
+
+          Action ..&gt; ActionStatusTypeEnum : actionStatus
+
       Action : createdBy
-        Action &lt;.. string : createdBy
+
       Action : description
-        Action &lt;.. string : description
+
       Action : endTime
-        Action &lt;.. datetime : endTime
+
       Action : environment
-        Action &lt;.. UcoObject : environment
+
+          Action ..&gt; UcoObject : environment
+
       Action : error
-        Action &lt;.. UcoObject : error
+
+          Action ..&gt; UcoObject : error
+
       Action : externalReference
-        Action &lt;.. string : externalReference
+
       Action : hasFacet
-        Action &lt;.. string : hasFacet
+
       Action : instrument
-        Action &lt;.. UcoObject : instrument
+
+          Action ..&gt; UcoObject : instrument
+
       Action : location
-        Action &lt;.. Location : location
+
+          Action ..&gt; Location : location
+
       Action : modifiedTime
-        Action &lt;.. datetime : modifiedTime
+
       Action : name
-        Action &lt;.. string : name
+
       Action : object
-        Action &lt;.. UcoObject : object
+
+          Action ..&gt; UcoObject : object
+
       Action : objectCreatedTime
-        Action &lt;.. datetime : objectCreatedTime
+
       Action : objectMarking
-        Action &lt;.. MarkingDefinitionAbstraction : objectMarking
+
+          Action ..&gt; MarkingDefinitionAbstraction : objectMarking
+
       Action : participant
-        Action &lt;.. UcoObject : participant
+
+          Action ..&gt; UcoObject : participant
+
       Action : performer
-        Action &lt;.. UcoObject : performer
+
+          Action ..&gt; UcoObject : performer
+
       Action : result
-        Action &lt;.. UcoObject : result
+
+          Action ..&gt; UcoObject : result
+
       Action : specVersion
-        Action &lt;.. string : specVersion
+
       Action : startTime
-        Action &lt;.. datetime : startTime
+
       Action : subaction
-        Action &lt;.. Action : subaction
+
+          Action ..&gt; Action : subaction
+
       Action : tag
-        Action &lt;.. string : tag
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -576,26 +552,16 @@ slot_usage:
     multivalued: true
     domain_of:
     - Action
-    - Action
-    - Action
-    - Action
   error:
     name: error
     multivalued: true
     domain_of:
     - Action
     - ActionLifecycle
-    - Action
-    - ActionLifecycle
-    - Action
-    - ActionLifecycle
   instrument:
     name: instrument
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   object:
     name: object
@@ -606,41 +572,20 @@ slot_usage:
     - Annotation
     - ContextualCompilation
     - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
   participant:
     name: participant
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   result:
     name: result
     multivalued: true
     domain_of:
     - Action
-    - Action
-    - Action
-    - Action
   location:
     name: location
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   endTime:
     name: endTime
@@ -649,22 +594,10 @@ slot_usage:
     - Action
     - ActionLifecycle
     - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
   startTime:
     name: startTime
     description: '"The time at which performance of the action began."'
     domain_of:
-    - Action
-    - ActionLifecycle
-    - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
     - Action
     - ActionLifecycle
     - Relationship
@@ -690,26 +623,16 @@ slot_usage:
     multivalued: true
     domain_of:
     - Action
-    - Action
-    - Action
-    - Action
   error:
     name: error
     multivalued: true
     domain_of:
     - Action
     - ActionLifecycle
-    - Action
-    - ActionLifecycle
-    - Action
-    - ActionLifecycle
   instrument:
     name: instrument
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   object:
     name: object
@@ -720,41 +643,20 @@ slot_usage:
     - Annotation
     - ContextualCompilation
     - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
-    - Action
-    - Annotation
-    - ContextualCompilation
-    - EnclosingCompilation
   participant:
     name: participant
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   result:
     name: result
     multivalued: true
     domain_of:
     - Action
-    - Action
-    - Action
-    - Action
   location:
     name: location
     multivalued: true
     domain_of:
-    - Action
-    - Action
-    - Action
     - Action
   endTime:
     name: endTime
@@ -763,22 +665,10 @@ slot_usage:
     - Action
     - ActionLifecycle
     - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
   startTime:
     name: startTime
     description: '"The time at which performance of the action began."'
     domain_of:
-    - Action
-    - ActionLifecycle
-    - Relationship
-    - Action
-    - ActionLifecycle
-    - Relationship
     - Action
     - ActionLifecycle
     - Relationship
@@ -1086,6 +976,6 @@ attributes:
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../assets/javascripts/bundle.fc8c2696.min.js"></script>
+<script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
 <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
 </html>
