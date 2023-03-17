@@ -205,7 +205,11 @@
 
       ActionArgumentFacet : argumentName
 
+          ActionArgumentFacet ..&gt; string : argumentName
+
       ActionArgumentFacet : value
+
+          ActionArgumentFacet ..&gt; string : value
 
 
 </div>
@@ -235,13 +239,13 @@
 <tbody>
 <tr>
 <td><a href="../argumentName/">argumentName</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>"The identifying label of an argument</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../value/">value</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A string value</td>
 <td>direct</td>
 </tr>
@@ -348,8 +352,7 @@ attributes:
   value:
     name: value
     description: '"The value of an action parameter."'
-    from_schema: https://w3id.org/linkmodel/uco-action
-    rank: 1000
+    from_schema: https://w3id.org/lmodel/uco-core
     alias: value
     owner: ActionArgumentFacet
     domain_of:

@@ -205,13 +205,19 @@
 
       ActionFrequencyFacet : rate
 
+          ActionFrequencyFacet ..&gt; decimal type : rate
+
       ActionFrequencyFacet : scale
+
+          ActionFrequencyFacet ..&gt; string : scale
 
       ActionFrequencyFacet : trend
 
           ActionFrequencyFacet ..&gt; TrendEnum : trend
 
       ActionFrequencyFacet : units
+
+          ActionFrequencyFacet ..&gt; string : units
 
 
 </div>
@@ -247,13 +253,13 @@
 </tr>
 <tr>
 <td><a href="../scale/">scale</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>"The time scale utilized for the frequency rate count for the occurence of an...</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../units/">units</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>"The units of measure utilized for the frequency rate count for the occurence...</td>
 <td>direct</td>
 </tr>
