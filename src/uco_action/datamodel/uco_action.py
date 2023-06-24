@@ -1,8 +1,8 @@
 # Auto generated from uco_action.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-04-11T23:22:23
+# Generation date: 2023-06-25T00:10:41
 # Schema: uco-action
 #
-# id: https://w3id.org/linkmodel/uco-action
+# id: https://w3id.org/lmodel/uco-action
 # description: This ontology defines classes and properties for characterizing actions.
 # license: https://www.apache.org/licenses/LICENSE-2.0
 

@@ -10,19 +10,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/linkmodel/uco-action.owl.ttl> a owl:Ontology ;
-    rdfs:label "uco-action" ;
-    ns1:IAO_0000700 <https://w3id.org/lmodel/collections/Thing>,
-        <https://w3id.org/lmodel/uco-core/UcoThing> ;
-    dcterms:license "https://www.apache.org/licenses/LICENSE-2.0" ;
-    dcterms:title "Uco Action" ;
-    pav:version "1.1.0" ;
-    linkml:generation_date "2023-04-11T23:23:08" ;
-    linkml:metamodel_version "1.7.0" ;
-    linkml:source_file "uco_action.yaml" ;
-    linkml:source_file_date "2023-04-11T22:54:00" ;
-    linkml:source_file_size 8791 .
-
 <https://w3id.org/lmodel/collections/Set> a owl:Class ;
     rdfs:label "Set" ;
     rdfs:comment "A collection that cannot contain duplicate elements." ;
@@ -33,16 +20,29 @@
         <https://w3id.org/sumo/kb/Set> ;
     skos:narrowMatch <http://identifiers.org/wikidata/Q36161> .
 
+<https://w3id.org/lmodel/uco-action.owl.ttl> a owl:Ontology ;
+    rdfs:label "uco-action" ;
+    ns1:IAO_0000700 <https://w3id.org/lmodel/collections/Thing>,
+        <https://w3id.org/lmodel/uco-core/UcoThing> ;
+    dcterms:license "https://www.apache.org/licenses/LICENSE-2.0" ;
+    dcterms:title "Uco Action" ;
+    pav:version "1.1.0" ;
+    linkml:generation_date "2023-06-25T00:11:41" ;
+    linkml:metamodel_version "1.7.0" ;
+    linkml:source_file "uco_action.yaml" ;
+    linkml:source_file_date "2023-06-25T00:06:09" ;
+    linkml:source_file_size 8788 .
+
 action:ActionArgumentFacet a owl:Class ;
     rdfs:label "ActionArgumentFacet" ;
     rdfs:comment "\"An action argument facet is a grouping of characteristics unique to a single parameter of an action.\"" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty action:argumentName ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/value> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/value> ;
+            owl:onProperty action:argumentName ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/lmodel/uco-core/Facet> .
 
@@ -52,7 +52,7 @@ action:ActionEstimationFacet a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty action:estimatedImpact ],
+            owl:onProperty action:objective ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
@@ -60,7 +60,7 @@ action:ActionEstimationFacet a owl:Class ;
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty action:objective ],
+            owl:onProperty action:estimatedImpact ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
@@ -71,8 +71,8 @@ action:ActionFrequencyFacet a owl:Class ;
     rdfs:label "ActionFrequencyFacet" ;
     rdfs:comment "\"An action frequency facet is a grouping of characteristics unique to the frequency of occurrence for an action.\"" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty action:units ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty action:rate ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/lmodel/uco-vocabulary/TrendEnum> ;
@@ -80,11 +80,11 @@ action:ActionFrequencyFacet a owl:Class ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty action:scale ;
+            owl:onProperty action:units ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:onDataRange xsd:decimal ;
-            owl:onProperty action:rate ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty action:scale ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/lmodel/uco-core/Facet> .
 
@@ -92,17 +92,13 @@ action:ActionLifecycle a owl:Class ;
     rdfs:label "ActionLifecycle" ;
     rdfs:comment "\"An action lifecycle is an action pattern consisting of an ordered set of multiple actions or subordinate action lifecycles.\"" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass action:ArrayOfAction ;
-            owl:onProperty action:phase ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:dateTime ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/endTime> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass <https://w3id.org/lmodel/uco-core/UcoObject> ;
-            owl:onProperty action:error ],
+            owl:onClass action:ArrayOfAction ;
+            owl:onProperty action:phase ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/uco-vocabulary/ActionStatusTypeEnum> ;
@@ -111,6 +107,10 @@ action:ActionLifecycle a owl:Class ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:nonNegativeInteger ;
             owl:onProperty action:actionCount ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://w3id.org/lmodel/uco-core/UcoObject> ;
+            owl:onProperty action:error ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:dateTime ;
@@ -191,13 +191,13 @@ action:_startTime a owl:DatatypeProperty ;
             owl:onDataRange xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/constrainingVocabularyName> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:anyURI ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/constrainingVocabularyReference> ],
-        [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/value> ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/constrainingVocabularyReference> ],
         <https://w3id.org/lmodel/uco-core/UcoObject> ;
     skos:exactMatch <http://identifiers.org/wikidata/Q1469824>,
         ns1:NCIT_C48697 .
@@ -230,16 +230,16 @@ action:_startTime a owl:DatatypeProperty ;
     rdfs:label "Relationship" ;
     rdfs:comment "A relationship is a grouping of characteristics unique to an assertion that one or more objects are related to another object in some way." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/kindOfRelationship> ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/startTime> ],
+            owl:onProperty <https://w3id.org/lmodel/uco-core/endTime> ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:boolean ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/isDirectional> ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/kindOfRelationship> ],
         [ a owl:Restriction ;
             owl:onClass <https://w3id.org/lmodel/uco-core/UcoObject> ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/target> ;
@@ -252,7 +252,7 @@ action:_startTime a owl:DatatypeProperty ;
                         owl:someValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ] ) ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/endTime> ],
+            owl:onProperty <https://w3id.org/lmodel/uco-core/startTime> ],
         <https://w3id.org/lmodel/uco-core/UcoObject> ;
     skos:exactMatch <http://identifiers.org/wikidata/Q930933>,
         ns1:NCIT_C25648 .
@@ -261,10 +261,6 @@ action:_startTime a owl:DatatypeProperty ;
     rdfs:label "GPSCoordinatesFacet" ;
     rdfs:comment "A GPS coordinates facet is a grouping of characteristics unique to the expression of quantified dilution of precision (DOP) for an asserted set of geolocation coordinates typically associated with satellite navigation such as the Global Positioning System (GPS)." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:decimal ;
-            owl:onProperty <https://w3id.org/lmodel/uco-location/tdop> ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:decimal ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/hdop> ],
@@ -276,6 +272,10 @@ action:_startTime a owl:DatatypeProperty ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:decimal ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/vdop> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:decimal ;
+            owl:onProperty <https://w3id.org/lmodel/uco-location/tdop> ],
         <https://w3id.org/lmodel/uco-core/Facet> .
 
 <https://w3id.org/lmodel/uco-location/LatLongCoordinatesFacet> a owl:Class ;
@@ -284,15 +284,15 @@ action:_startTime a owl:DatatypeProperty ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:decimal ;
+            owl:onProperty <https://w3id.org/lmodel/uco-location/latitude> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:decimal ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/longitude> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:decimal ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/altitude> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:decimal ;
-            owl:onProperty <https://w3id.org/lmodel/uco-location/latitude> ],
         <https://w3id.org/lmodel/uco-core/Facet> .
 
 <https://w3id.org/lmodel/uco-location/SimpleAddressFacet> a owl:Class ;
@@ -305,14 +305,6 @@ action:_startTime a owl:DatatypeProperty ;
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-location/region> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-location/addressType> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/country> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
@@ -322,6 +314,14 @@ action:_startTime a owl:DatatypeProperty ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-location/street> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty <https://w3id.org/lmodel/uco-location/region> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty <https://w3id.org/lmodel/uco-location/addressType> ],
         <https://w3id.org/lmodel/uco-core/Facet> .
 
 <https://w3id.org/lmodel/uco-pattern/LogicalPattern> a owl:Class ;
@@ -4668,6 +4668,9 @@ action:subaction a owl:ObjectProperty ;
     rdfs:label "List" ;
     rdfs:comment "An ordered array of items, that can be present in multiple copies" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/lmodel/collections/ListItem> ;
+            owl:onProperty <https://w3id.org/lmodel/collections/item> ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/collections/ListItem> ;
             owl:onProperty <https://w3id.org/lmodel/collections/lastItem> ],
@@ -4675,9 +4678,6 @@ action:subaction a owl:ObjectProperty ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/collections/ListItem> ;
             owl:onProperty <https://w3id.org/lmodel/collections/firstItem> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/lmodel/collections/ListItem> ;
-            owl:onProperty <https://w3id.org/lmodel/collections/item> ],
         <https://w3id.org/lmodel/collections/Bag> ;
     skos:altLabel "list" ;
     skos:exactMatch <http://identifiers.org/wikidata/Q12139612>,
@@ -4709,11 +4709,11 @@ action:subaction a owl:ObjectProperty ;
     rdfs:comment "\"A dictionary entry is a single (term/key, value) pair.\"" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-types/key> ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/value> ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/value> ;
+            owl:onProperty <https://w3id.org/lmodel/uco-types/key> ;
             owl:qualifiedCardinality 1 ],
         <https://w3id.org/lmodel/uco-core/UcoInherentCharacterizationThing> ;
     skos:exactMatch <http://identifiers.org/wikidata/Q4818718> .
@@ -4723,32 +4723,39 @@ action:Action a owl:Class ;
     rdfs:comment "\"An action is something that may be done or performed.\"" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
-            owl:onProperty action:instrument ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
-            owl:onProperty action:error ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/object> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:nonNegativeInteger ;
-            owl:onProperty action:actionCount ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
             owl:onProperty action:result ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/startTime> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/uco-core/UcoObject> ;
             owl:onProperty action:performer ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:nonNegativeInteger ;
+            owl:onProperty action:actionCount ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
+            owl:onProperty action:instrument ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/startTime> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/object> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
+            owl:onProperty action:error ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom action:Action ;
+            owl:onProperty action:subaction ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/uco-core/UcoObject> ;
             owl:onProperty action:environment ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/endTime> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass <https://w3id.org/lmodel/uco-vocabulary/ActionStatusTypeEnum> ;
@@ -4759,13 +4766,6 @@ action:Action a owl:Class ;
         [ a owl:Restriction ;
             owl:allValuesFrom <https://w3id.org/lmodel/uco-core/UcoObject> ;
             owl:onProperty action:participant ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom action:Action ;
-            owl:onProperty action:subaction ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/endTime> ],
         <https://w3id.org/lmodel/uco-core/UcoObject> ;
     skos:exactMatch <http://identifiers.org/wikidata/Q4026292>,
         ns1:NCIT_C25404,
@@ -4834,11 +4834,25 @@ action:Action a owl:Class ;
     rdfs:label "UcoObject" ;
     rdfs:comment "A UCO object is a representation of a fundamental concept either directly inherent to the cyber domain or indirectly related to the cyber domain and necessary for contextually characterizing cyber domain concepts and relationships. Within the Unified Cyber Ontology (UCO) structure this is the base class acting as a consistent, unifying and interoperable foundation for all explicit and inter-relatable content objects." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty dcterms:description ],
+            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/MarkingDefinitionAbstraction> ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/objectMarking> ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/tag> ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdfs:label ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:dateTime ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/objectCreatedTime> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/hasFacet> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty <https://w3id.org/lmodel/uco-core/modifiedTime> ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
@@ -4851,22 +4865,8 @@ action:Action a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty <https://w3id.org/lmodel/uco-core/externalReference> ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty rdfs:label ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/modifiedTime> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:dateTime ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/objectCreatedTime> ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom <https://w3id.org/lmodel/uco-core/MarkingDefinitionAbstraction> ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/objectMarking> ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty <https://w3id.org/lmodel/uco-core/hasFacet> ],
+            owl:onProperty dcterms:description ],
         <https://w3id.org/lmodel/uco-core/UcoThing> ;
     skos:relatedMatch <http://identifiers.org/sio/000776>,
         <http://identifiers.org/wikidata/Q488383> .
